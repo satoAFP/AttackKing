@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class base_player : MonoBehaviour
 {
+    /// <summary>
+    /// E‹Æ
+    /// </summary>
     public enum JOB_TYPE
     {
         WARRIOR,    //ím
