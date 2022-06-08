@@ -9,8 +9,8 @@ public class drop_weapon : base_weapon
     //共有変数
     public WeaponData Wd = new WeaponData()               //ドロップ時のステータス格納用
     {
-        name = "", image = null, skill = null, 
-        strength = 0, magic = 0, weight = 0
+        name = "", image = null, skill = null,
+        strength = 0, magic = 0, weight = 0, mp_cost = 0
     };
 
     public AddStatus As = new AddStatus()                 //ドロップ時の追加ステータス格納用
@@ -68,6 +68,7 @@ public class drop_weapon : base_weapon
         Wd.strength = drop_weapon.Strength;
         Wd.magic = drop_weapon.Magic;
         Wd.weight = drop_weapon.Weight;
+        Wd.mp_cost = drop_weapon.mp_cost;
     }
 
 

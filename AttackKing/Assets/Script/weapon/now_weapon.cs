@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class now_weapon : base_weapon
 {
+    //テスト
+    [SerializeField] private GameObject skill;
+
     [System.NonSerialized] public WeaponData wd;            //武器データ作成
 
     
@@ -14,6 +17,7 @@ public class now_weapon : base_weapon
     private float sord_speed = 0;           //攻撃速度
     private Rigidbody2D rb;                 //リジットボディ取得用
     private player player;                  //プレイヤー取得用
+    private skill_pos sp;                   //スキルポスの取得用
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,7 @@ public class now_weapon : base_weapon
         //初期化
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         player = transform.parent.gameObject.GetComponent<player>();
+        sp = transform.parent.gameObject.GetComponent<skill_pos>();
     }
 
     // Update is called once per frame
@@ -48,8 +53,12 @@ public class now_weapon : base_weapon
 
             // ワールド座標を基準に、回転を取得
             Vector3 worldAngle = cloneTransform.eulerAngles;
-            worldAngle.z = GetAim(transform.position, mouseWorldPos) + 135; // ワールド座標を基準に、z軸を軸にした回転を10度に変更
+            worldAngle.z = GetAim(transform.position, mouseWorldPos) - 45; // ワールド座標を基準に、z軸を軸にした回転を10度に変更
             cloneTransform.eulerAngles = worldAngle; // 回転角度を設定
+
+
+            sp.skill = skill;
+            sp.AttackStart = true;
 
             atack_flag = false;
         }

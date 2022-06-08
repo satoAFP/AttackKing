@@ -11,5 +11,5 @@ public class format_weapon : base_weapon
     public int Strength;
     public int Magic;
     public float Weight;
-    
+    public int mp_cost;
 }

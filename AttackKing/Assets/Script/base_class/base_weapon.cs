@@ -17,6 +17,7 @@ public class base_weapon : MonoBehaviour
         public int strength;
         public int magic;
         public float weight;
+        public int mp_cost;
     }
 
     /// <summary>

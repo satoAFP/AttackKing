@@ -45,7 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: "\u30B7\u30E7\u30FC\u30C8\u30BD\u30FC\u30C9"
   Image: {fileID: 21300000, guid: 48910435d90efe2469d01eff2c47b518, type: 3}
-  Skill: {fileID: 0}
+  Skill: {fileID: 2831615029926714473, guid: 5c4fa99b1b9d34246b0235da02017ce1, type: 3}
   Strength: 10
   Magic: 0
   Weight: 10
+  mp_cost: 5
