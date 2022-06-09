@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class now_weapon : base_weapon
 {
-    //テスト
-    [SerializeField] private GameObject skill;
+    public WeaponData wd = new WeaponData()             //武器データ作成
+    {
+        name = "", image = null, skill = null,
+        strength = 0, magic = 0, weight = 0, mp_cost = 0
+    };
 
-    [System.NonSerialized] public WeaponData wd;            //武器データ作成
 
-    
     private GameObject clone;               //クローンするオブジェクト
     private int time = 0;                   //折り返しまでの時間
     private bool atack_flag = true;         //これが真のとき攻撃できる
@@ -22,10 +23,9 @@ public class now_weapon : base_weapon
     // Start is called before the first frame update
     void Start()
     {
-        //武器の速度調整
-        wd.weight = 20;
-        sord_speed = 100 / wd.weight;
+        wd.weight = 50;
         Debug.Log(System.Enum.GetValues(typeof(ADD_STATUS_TYPE)).Length);
+
         //初期化
         rb = this.gameObject.GetComponent<Rigidbody2D>();
         player = transform.parent.gameObject.GetComponent<player>();
@@ -35,9 +35,18 @@ public class now_weapon : base_weapon
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(wd.name);
+        Debug.Log(wd.image);
+        Debug.Log(wd.skill);
+        Debug.Log(wd.strength);
+        Debug.Log(wd.magic);
+        Debug.Log(wd.weight);
         //攻撃処理
         if (atack_flag == true)
         {
+            //武器の速度調整
+            sord_speed = 100 / (wd.weight * 2);
+
             // クリックした座標の取得（スクリーン座標からワールド座標に変換）
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -57,21 +66,24 @@ public class now_weapon : base_weapon
             cloneTransform.eulerAngles = worldAngle; // 回転角度を設定
 
 
-            sp.skill = skill;
-            sp.AttackStart = true;
 
+            //使用するスキル決定
+            sp.skill = wd.skill;
+            //スキルの攻撃開始許可
+            sp.AttackStart = true;
+            //攻撃処理終了
             atack_flag = false;
         }
 
         //出現時間の折り返しまでくると戻ってくる
-        if (time == (wd.weight / 2))
+        if (time == (wd.weight))
         {
             rb.velocity = -mem_shotForward * sord_speed;
         }
         
         //消去
         time++;
-        if (time == wd.weight)
+        if (time == wd.weight * 2) 
         {
             this.gameObject.SetActive(false);
             this.gameObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);

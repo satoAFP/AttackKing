@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class drop_weapon : base_weapon
 {
-
-
     //共有変数
     public WeaponData Wd = new WeaponData()               //ドロップ時のステータス格納用
     {
@@ -21,12 +19,6 @@ public class drop_weapon : base_weapon
  
 
 
-    //プライベート変数
-    private int status_num = 0;
-    
-
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,19 +28,14 @@ public class drop_weapon : base_weapon
         //追加ステータス決定
         AddStatusDecision();
 
-        Debug.Log(Wd.name);
-        Debug.Log(Wd.image);
-        Debug.Log(Wd.skill);
-        Debug.Log(Wd.strength);
-        Debug.Log(Wd.magic);
-        Debug.Log(Wd.weight);
+        //Debug.Log(Wd.name);
+        //Debug.Log(Wd.image);
+        //Debug.Log(Wd.skill);
+        //Debug.Log(Wd.strength);
+        //Debug.Log(Wd.magic);
+        //Debug.Log(Wd.weight);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     /// <summary>
@@ -78,7 +65,7 @@ public class drop_weapon : base_weapon
     private void AddStatusDecision()
     {
         //追加ステータスの数決定
-        status_num = Random.Range(0, 5);
+        int status_num = Random.Range(0, 5);
 
         //追加ステータスの内容決定
         for (int i = 0; i < 5; i++)
@@ -96,7 +83,7 @@ public class drop_weapon : base_weapon
                 As.addname[i] = "---";
                 As.addvalue[i] = 0;
             }
-            Debug.Log(As.addname[i] + " : " + As.addvalue[i]);
+            //Debug.Log(As.addname[i] + " : " + As.addvalue[i]);
         }
     }
 

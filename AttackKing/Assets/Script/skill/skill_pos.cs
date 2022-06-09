@@ -20,8 +20,12 @@ public class skill_pos : MonoBehaviour
     {
         if(AttackStart)
         {
-            //スキルの生成
-            GameObject clone = Instantiate(skill, transform.position, Quaternion.identity);
+            //スキルが無いときはクローンしない
+            if (skill != null)
+            {
+                //スキルの生成
+                GameObject clone = Instantiate(skill, transform.position, Quaternion.identity);
+            }
 
             AttackStart = false;
         }

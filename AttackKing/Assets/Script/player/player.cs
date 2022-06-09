@@ -6,6 +6,8 @@ public class player : base_player
 {
     private JOB_TYPE JOB;
     private Rigidbody2D rb;
+    private GameObject clickedGameObject = null;//クリックされたオブジェクト
+    private now_weapon ChildObj = null;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class player : base_player
         luc = 5;
 
         rb = this.gameObject.GetComponent<Rigidbody2D>();
+        ChildObj = transform.GetChild(0).gameObject.GetComponent<now_weapon>();
     }
 
     // Update is called once per frame
@@ -33,7 +36,13 @@ public class player : base_player
         Move();
 
         Attack();
+
+        
+
+        GetWeapon();
     }
+
+
 
     /// <summary>
     /// 移動処理
@@ -70,6 +79,35 @@ public class player : base_player
 
             //攻撃するとクールタイム初期化
             //sord_time = sord_cool;
+        }
+    }
+
+
+    /// <summary>
+    /// 武器取得処理
+    /// </summary>
+    private void GetWeapon()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            //カーソルの位置にレイを飛ばす
+            clickedGameObject = null;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
+            
+            if (hit2d)
+            {
+                //そのオブジェクトを格納
+                clickedGameObject = hit2d.transform.gameObject;
+
+                if (clickedGameObject.tag == "drop")
+                {
+                    ChildObj.wd = clickedGameObject.GetComponent<drop_weapon>().Wd;
+
+                    //右クリックしたアイテムを削除
+                    Destroy(clickedGameObject);
+                }
+            }
         }
     }
 
